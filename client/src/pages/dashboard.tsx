@@ -50,7 +50,18 @@ export default function Dashboard() {
 
               {products && products.length > 0 && (
                 <div className="grid md:grid-cols-2 gap-6">
-                  <OptimizationSettings productId={products[0].id} />
+                  <div className="space-y-4">
+                    <OptimizationSettings productId={products[0].id} />
+                    <div className="p-4 border rounded-lg bg-card">
+                      <h4 className="text-lg font-semibold mb-2">Market Overview</h4>
+                      <div className="text-sm text-muted-foreground">
+                        <p>Active Products: {products.length}</p>
+                        <p>Optimized Today: {products.filter(p => 
+                          p.lastOptimizedAt && new Date(p.lastOptimizedAt).toDateString() === new Date().toDateString()
+                        ).length}</p>
+                      </div>
+                    </div>
+                  </div>
                   <ProductTable
                     products={products}
                     isLoading={isLoading}

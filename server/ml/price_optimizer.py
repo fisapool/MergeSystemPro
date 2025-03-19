@@ -13,6 +13,15 @@ class PriceOptimizer:
         current_price = data['product']['currentPrice']
         history = data['history']
         market_context = data['marketContext']
+        
+        analysis_data = {
+            'timestamp': datetime.now().isoformat(),
+            'market_factors': {
+                'competitor_count': len(market_context['competitors']),
+                'category_avg': market_context['categoryAverage'],
+                'market_trend': market_context['trend']
+            }
+        }
 
         # Calculate competitor-based price adjustment
         competitor_prices = [p['price'] for p in market_context['competitors']]

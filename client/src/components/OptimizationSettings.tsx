@@ -32,8 +32,9 @@ export default function OptimizationSettings({ productId }: Props) {
   const queryClient = useQueryClient();
 
   // Fetch current settings
-  const { data: product, isLoading } = useQuery<ExtendedProduct>({
-    queryKey: [`/api/products/${productId}`]
+  const { data: product, isLoading } = useQuery({
+    queryKey: [`/api/products/${productId}`],
+    queryFn: () => apiRequest("GET", `/api/products/${productId}`).then(res => res.json())
   });
 
   const settings = product?.optimizationHistory?.autoAdjustSettings || {
