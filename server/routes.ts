@@ -59,15 +59,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     try {
-      // Call ML service for price optimization
       const history = await storage.getPriceHistory(productId);
-      const recommendedPrice = await optimizePrice(product, history);
+      const categoryProducts = await storage.getProductsByCategory(product.category);
+      const marketStats = await storage.getMarketStatistics(product.category);
+      
+      const optimizationData = {
+        product,
+        history,
+        categoryProducts,
+        marketStats,
+      };
+
+      const recommendedPrice = await optimizePrice(optimizationData);
+      const confidence = calculateConfidence(optimizationData);
 
       const updated = await storage.updateProduct(productId, {
         recommendedPrice: recommendedPrice.toString(),
       });
 
-      res.json(updated);
+      res.json({
+        ...updated,
+        confidence,
+        marketAnalysis: {
+          categoryAverage: marketStats.averagePrice,
+          competitorCount: categoryProducts.length,
+          marketTrend: marketStats.trend
+        }
+      });
     } catch (err) {
       res.status(500).send("Failed to optimize price");
     }

@@ -16,6 +16,11 @@ export const products = pgTable("products", {
   recommendedPrice: decimal("recommended_price"),
   category: text("category").notNull(),
   userId: integer("user_id").notNull(),
+  sku: text("sku"),
+  stock: integer("stock"),
+  description: text("description"),
+  rating: decimal("rating"),
+  salesCount: integer("sales_count"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
