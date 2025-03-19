@@ -7,6 +7,14 @@ import argparse
 
 def process_lazada_data(csv_path: str) -> Dict[str, Any]:
     df = pd.read_csv(csv_path)
+    df['price'] = pd.to_numeric(df['price'], errors='coerce')
+    df = df.dropna(subset=['price'])
+    
+    # Add market trend analysis
+    if 'sales_count' in df.columns and 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df = df.sort_values('timestamp')
+        df['rolling_sales'] = df.groupby('category')['sales_count'].rolling('7D').mean()
     
     stats = {
         'total_products': len(df),
