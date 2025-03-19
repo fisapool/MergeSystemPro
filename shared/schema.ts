@@ -80,5 +80,27 @@ export type InsertProduct = z.infer<typeof insertProductSchema>;
 export type InsertPriceHistory = z.infer<typeof insertPriceHistorySchema>;
 export type User = typeof users.$inferSelect;
 export type Product = typeof products.$inferSelect;
+// Store ML optimization results
+export const optimizationResults = pgTable("optimization_results", {
+  id: serial("id").primaryKey(),
+  productId: integer("product_id").notNull(),
+  recommendedPrice: decimal("recommended_price").notNull(),
+  confidenceScore: decimal("confidence_score").notNull(),
+  marketData: jsonb("market_data"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
+export const optimizationMetrics = pgTable("optimization_metrics", {
+  id: serial("id").primaryKey(),
+  optimizationId: integer("optimization_id").notNull(),
+  salesVelocity: decimal("sales_velocity"),
+  priceElasticity: decimal("price_elasticity"),
+  competitorCount: integer("competitor_count"),
+  marketShare: decimal("market_share"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export type PriceHistory = typeof priceHistory.$inferSelect;
 export type LazadaImport = z.infer<typeof lazadaImportSchema>;
+export type OptimizationResult = typeof optimizationResults.$inferSelect;
+export type OptimizationMetric = typeof optimizationMetrics.$inferSelect;

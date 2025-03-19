@@ -75,36 +75,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/products/:id/optimize", async (req, res) => {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     const productId = parseInt(req.params.id);
-    
+
     try {
       const product = await storage.getProduct(productId);
-      if (!product || product.userId !== req.user.id) {
-        return res.sendStatus(404);
-      }
+      if (!product) return res.sendStatus(404);
 
-      const history = await storage.getPriceHistory(productId);
-      const marketStats = await storage.getMarketStatistics(product.category);
-      
       const pythonOptions = {
         mode: 'text',
         pythonPath: 'python3',
-        pythonOptions: ['-u'],
         scriptPath: './server/ml',
-        args: [JSON.stringify({ product, history, marketContext: marketStats })]
+        args: [JSON.stringify({ product })]
       };
 
       PythonShell.run('price_optimizer.py', pythonOptions).then(async results => {
         const optimization = JSON.parse(results[0]);
-        await storage.updateProduct(productId, {
-          recommendedPrice: optimization.recommended_price,
+        const savedResult = await storage.saveOptimizationResult({
+          productId,
+          recommendedPrice: optimization.price,
           confidenceScore: optimization.confidence,
-          lastOptimizedAt: new Date()
+          marketData: optimization.market_data
         });
-        res.json(optimization);
+        res.json(savedResult);
       });
     } catch (err) {
-      res.status(500).send("Optimization failed");
+      res.status(500).json({ error: "Optimization failed" });
     }
+  });
+
+  app.get("/api/products/:id/optimizations", async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    const productId = parseInt(req.params.id);
+    const results = await storage.getOptimizationHistory(productId);
+    res.json(results);
   });
 
   app.post("/api/products", async (req, res) => {
