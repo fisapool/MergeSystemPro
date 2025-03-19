@@ -1,4 +1,3 @@
-
 import { useAuth } from "@/hooks/use-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -24,7 +23,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Redirect } from "wouter";
 
 function RegisterForm() {
-  const { registerMutation } = useAuth();
+  const { registerMutation: mutation } = useAuth(); // Assuming registerMutation is now accessed via mutation
   const form = useForm({
     resolver: zodResolver(insertUserSchema),
     defaultValues: {
@@ -36,7 +35,7 @@ function RegisterForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit((data) => registerMutation.mutate(data))}
+        onSubmit={form.handleSubmit((data) => mutation.mutate(data))} // Use mutation here as well
         className="space-y-4"
       >
         <FormField
@@ -70,9 +69,9 @@ function RegisterForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={registerMutation.isPending}
+          disabled={mutation.isPending}
         >
-          {registerMutation.isPending ? 'Registering...' : 'Register'}
+          {mutation.isPending ? 'Registering...' : 'Register'}
         </Button>
       </form>
     </Form>
