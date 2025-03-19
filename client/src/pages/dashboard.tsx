@@ -4,6 +4,7 @@ import { Product } from "@shared/schema";
 import ProductTable from "@/components/ProductTable";
 import PriceChart from "@/components/PriceChart";
 import OptimizationSettings from "@/components/OptimizationSettings";
+import MarketAnalysis from "@/components/MarketAnalysis";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
@@ -52,15 +53,7 @@ export default function Dashboard() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <OptimizationSettings productId={products[0].id} />
-                    <div className="p-4 border rounded-lg bg-card">
-                      <h4 className="text-lg font-semibold mb-2">Market Overview</h4>
-                      <div className="text-sm text-muted-foreground">
-                        <p>Active Products: {products.length}</p>
-                        <p>Optimized Today: {products.filter(p => 
-                          p.lastOptimizedAt && new Date(p.lastOptimizedAt).toDateString() === new Date().toDateString()
-                        ).length}</p>
-                      </div>
-                    </div>
+                    <MarketAnalysis productId={products[0].id} />
                   </div>
                   <ProductTable
                     products={products}
