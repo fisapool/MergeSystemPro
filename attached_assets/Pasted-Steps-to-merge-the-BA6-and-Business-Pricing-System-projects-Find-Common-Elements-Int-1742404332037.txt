@@ -1,0 +1,219 @@
+Steps to merge the "BA6" and "Business Pricing System" projects:
+
+
+
+
+
+Find Common Elements:
+
+
+
+
+
+Integration is possible since both projects use Python and Docker.
+
+
+
+Find shared Docker setups, database connections, and libraries.
+
+
+
+Merge Setup Guide:
+
+
+
+
+
+Install both projects' dependencies by consolidating setup steps.
+
+
+
+Manage both projects' Docker services with one configuration.
+
+
+
+Feature Integration:
+
+
+
+
+
+Select characteristics from both projects to compliment each other. Lazada Products API product data might be analysed and optimised using the Business price System's dynamic price optimisation and machine learning algorithms.
+
+Example Combined Set:
+
+Prerequisites:
+
+
+
+
+
+Docker/Docker Compose installed
+
+
+
+Node.js (BA6 project)
+
+
+
+Business Pricing System Python
+
+
+
+Windows PowerShell (connect-db.ps1)
+
+Using Docker:
+
+
+
+
+
+Clone both repos:
+
+bash
+
+Clone https://github.com/fisapool/BA6.git
+git clone fisapool/business-pricing-system.git
+cd BA6
+
+
+
+
+Docker containers start:
+
+bash
+
+run docker-compose
+
+
+
+
+Confirm container running:
+
+bash
+
+ps docker compose
+
+
+Install Python Dependencies:
+
+
+
+
+
+Visit the business-pricing-system directory.
+
+bash
+
+Business pricing scheme
+
+
+
+
+Install dependencies:
+
+bash
+
+pip install requirements.txt
+
+
+
+
+Make essential directories:
+
+bash
+
+directory data models documentation
+
+
+Database Access:
+
+Connect to the database using the supplied PowerShell script:
+
+bash
+
+./connect-db.ps1
+
+
+Running Business Pricing System:
+
+
+
+
+
+Produce Sample Data:
+
+bash
+
+Python create_sample_data.
+
+
+
+
+Train Models:
+
+bash
+
+main.py --train data/historical_sales.csv --output-dir models
+
+
+
+
+Optimise Price:
+
+bash
+
+Python main.py --optimise --config config/pricing_config.json --data-dir data
+
+
+
+
+Dashboard update:
+
+bash
+
+Python main.py --update-dashboard data-dir
+
+
+Project Structure Example:
+
+Code
+
+combined-project/
+├── BA6/
+Dockerfile
+Docker-compose.yml
+App.js
+Package.json
+Use connect-db.ps1.
+Database schema.sql
+See requirements.txt.
+Lazada_Popular ItemSee README.md. - sellercenter.csv
+Refer to README.md.
+- Business Pricing System
+Create example data.py
+Main.py
+See requirements.txt.
+config/
+│ ├── data/
+Models/
+│ ├── docs/
+Refer to README.md.
+└── README.md
+
+
+Integrating Features:
+
+
+
+
+
+Get product info via BA6 APIs.
+
+
+
+Analyse and optimise BA6 product price using Business price System machine learning models.
+
+
+
+Combine dashboards and reports to display product data and price optimisation findings.
