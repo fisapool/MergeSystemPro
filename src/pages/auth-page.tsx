@@ -29,6 +29,13 @@ function RegisterForm() {
         className="space-y-4"
       >
         {/* ... form fields ... */}
+        <Button
+            type="submit"
+            className="w-full"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending ? 'Registering...' : 'Register'}
+          </Button>
       </form>
     </Form>
   );
