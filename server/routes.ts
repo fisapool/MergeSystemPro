@@ -4,6 +4,22 @@ import { setupAuth } from "./auth";
 import { storage } from "./storage";
 import { insertProductSchema, type Product, type PriceHistory } from "@shared/schema";
 import { z } from "zod";
+import { importLazadaProducts } from "./scripts/import_lazada_data";
+import multer from "multer";
+import path from "path";
+
+// Configure multer for file uploads
+const upload = multer({
+  dest: 'uploads/',
+  fileFilter: (_req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext !== '.csv') {
+      cb(new Error('Only CSV files are allowed'));
+      return;
+    }
+    cb(null, true);
+  }
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
   setupAuth(app);
@@ -13,6 +29,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     const products = await storage.getProductsByUser(req.user.id);
     res.json(products);
+  });
+
+  // New route for importing Lazada products
+  app.post("/api/products/import/lazada", upload.single('file'), async (req, res) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+
+    try {
+      const result = await importLazadaProducts(req.file.path, req.user.id);
+      res.json(result);
+    } catch (err) {
+      res.status(500).json({ 
+        message: "Failed to import products",
+        error: err instanceof Error ? err.message : "Unknown error"
+      });
+    }
   });
 
   app.post("/api/products", async (req, res) => {
@@ -47,7 +79,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const history = await storage.getPriceHistory(productId);
     res.json(history);
   });
-
   app.get("/api/analysis/lazada", async (req, res) => {
   if (!req.isAuthenticated()) return res.sendStatus(401);
   
@@ -71,7 +102,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   }
 });
 
-app.post("/api/products/:id/optimize", async (req, res) => {
+  app.post("/api/products/:id/optimize", async (req, res) => {
     if (!req.isAuthenticated()) return res.sendStatus(401);
 
     const productId = parseInt(req.params.id);

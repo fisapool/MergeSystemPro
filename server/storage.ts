@@ -66,6 +66,10 @@ export class MemStorage implements IStorage {
       sku: insertProduct.sku || null,
       stock: insertProduct.stock || null,
       description: insertProduct.description || null,
+      competitorPrices: insertProduct.competitorPrices || null,
+      optimizationHistory: insertProduct.optimizationHistory || null,
+      confidenceScore: insertProduct.confidenceScore || null,
+      lastOptimizedAt: insertProduct.lastOptimizedAt || null,
       updatedAt: new Date(),
     };
     this.products.set(id, product);
@@ -93,6 +97,8 @@ export class MemStorage implements IStorage {
       ...insertHistory,
       id,
       timestamp: new Date(),
+      marketContext: insertHistory.marketContext || null,
+      optimizationReason: insertHistory.optimizationReason || null,
     };
     this.priceHistory.set(id, history);
     return history;
