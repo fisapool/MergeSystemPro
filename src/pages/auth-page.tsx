@@ -8,6 +8,12 @@ const insertUserSchema = z.object({
 
 function RegisterForm() {
   const { registerUser } = useAuth();
+  const mutation = useMutation({
+    mutationFn: async (data: any) => {
+      await registerUser(data);
+    }
+  });
+
   const form = useForm({
     resolver: zodResolver(insertUserSchema),
     defaultValues: {
@@ -16,18 +22,10 @@ function RegisterForm() {
     },
   });
 
-  const onSubmit = async (data: any) => {
-    try {
-      await registerUser(data);
-    } catch (error) {
-      console.error('Registration failed:', error);
-    }
-  };
-
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit((data) => mutation.mutate(data))}
         className="space-y-4"
       >
         {/* ... form fields ... */}
