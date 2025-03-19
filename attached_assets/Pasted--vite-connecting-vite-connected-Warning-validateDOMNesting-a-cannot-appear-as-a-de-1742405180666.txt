@@ -1,0 +1,37 @@
+[vite] connecting...
+[vite] connected.
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=978b9087:337:18
+    at div
+    at div
+    at nav
+    at Navbar (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/components/Navbar.tsx:24:30)
+    at div
+    at HomePage (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/pages/home-page.tsx:32:20)
+    at ProtectedRoute (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=978b9087:379:17)
+    at Router
+    at AuthProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=978b9087:2805:3)
+    at App
+at a
+at a
+at https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=978b9087:337:18
+at div
+at div
+at nav
+at Navbar (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/components/Navbar.tsx:24:30)
+at div
+at HomePage (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/pages/home-page.tsx:32:20)
+at ProtectedRoute (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/lib/protected-route.tsx:22:3)
+at Switch (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=978b9087:379:17)
+at Router
+at AuthProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+at QueryClientProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=978b9087:2805:3)
+at App
+at t.value (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
