@@ -42,6 +42,9 @@ export const insertProductSchema = createInsertSchema(products).pick({
   currentPrice: true,
   category: true,
   userId: true,
+  sku: true,
+  stock: true,
+  description: true,
 });
 
 export const insertPriceHistorySchema = createInsertSchema(priceHistory).pick({

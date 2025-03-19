@@ -62,7 +62,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const history = await storage.getPriceHistory(productId);
       const categoryProducts = await storage.getProductsByCategory(product.category);
       const marketStats = await storage.getMarketStatistics(product.category);
-      
+
       const optimizationData = {
         product,
         history,
@@ -70,7 +70,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         marketStats,
       };
 
-      const recommendedPrice = await optimizePrice(optimizationData);
+      const recommendedPrice = await optimizePrice(product, history);
       const confidence = calculateConfidence(optimizationData);
 
       const updated = await storage.updateProduct(productId, {
@@ -100,4 +100,10 @@ async function optimizePrice(product: Product, history: PriceHistory[]): Promise
   // For now, return a simple recommendation
   const currentPrice = parseFloat(product.currentPrice.toString());
   return Number((currentPrice * 1.1).toFixed(2)); // Suggest 10% increase, rounded to 2 decimal places
+}
+
+function calculateConfidence(data: any): number {
+  // For now, return a simple confidence score
+  // In reality, this would be calculated based on various factors
+  return 0.85; // 85% confidence
 }
