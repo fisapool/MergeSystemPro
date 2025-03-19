@@ -9,12 +9,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { BarChart, LineChart, TrendingUp } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function HomePage() {
   const { user } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">
