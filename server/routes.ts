@@ -96,10 +96,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
 }
 
 async function optimizePrice(product: Product, history: PriceHistory[]): Promise<number> {
-  // This would normally call the Python ML service
-  // For now, return a simple recommendation
-  const currentPrice = parseFloat(product.currentPrice.toString());
-  return Number((currentPrice * 1.1).toFixed(2)); // Suggest 10% increase, rounded to 2 decimal places
+  const { PythonShell } = require('python-shell');
+  
+  const options = {
+    scriptPath: 'server/ml',
+    args: [
+      '--price', product.currentPrice.toString(),
+      '--history', JSON.stringify(history)
+    ]
+  };
+  
+  return new Promise((resolve, reject) => {
+    PythonShell.run('price_optimizer.py', options, (err: any, results: any) => {
+      if (err) {
+        console.error('Price optimization failed:', err);
+        reject(err);
+      }
+      const result = JSON.parse(results[0]);
+      resolve(result.recommended_price);
+    });
+  });
 }
 
 function calculateConfidence(data: any): number {
