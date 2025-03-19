@@ -7,6 +7,13 @@ export interface MarketStatistics {
   competitorCount: number;
 }
 
+export interface AutoAdjustSettings {
+  enabled: boolean;
+  minConfidence: number;
+  maxPriceChange: number;
+  adjustmentFrequency: number;
+}
+
 export interface IStorage {
   sessionStore: session.Store;
 

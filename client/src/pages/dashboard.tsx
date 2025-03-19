@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Product } from "@shared/schema";
 import ProductTable from "@/components/ProductTable";
 import PriceChart from "@/components/PriceChart";
+import OptimizationSettings from "@/components/OptimizationSettings";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
@@ -46,11 +47,17 @@ export default function Dashboard() {
                   recommend optimal prices for your products.
                 </p>
               </div>
-              <ProductTable
-                products={products || []}
-                isLoading={isLoading}
-                showOptimize
-              />
+
+              {products && products.length > 0 && (
+                <div className="grid md:grid-cols-2 gap-6">
+                  <OptimizationSettings productId={products[0].id} />
+                  <ProductTable
+                    products={products}
+                    isLoading={isLoading}
+                    showOptimize
+                  />
+                </div>
+              )}
             </div>
           </TabsContent>
         </Tabs>
