@@ -7,29 +7,33 @@ const insertUserSchema = z.object({
 });
 
 function RegisterForm() {
-  const [formData, setFormData] = React.useState({
-    // ... initial form data ...
-  });
-
-  const mutation = useMutation({
-    mutationFn: (data: z.infer<typeof insertUserSchema>) => {
-      return fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      }).then((res) => {
-        if (!res.ok) throw new Error("Registration failed");
-        return res.json();
-      });
+  const { registerUser } = useAuth();
+  const form = useForm({
+    resolver: zodResolver(insertUserSchema),
+    defaultValues: {
+      username: "",
+      password: "",
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutation.mutate(formData);
+  const onSubmit = async (data: any) => {
+    try {
+      await registerUser(data);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
 
-  // ... rest of the RegisterForm component ...
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4"
+      >
+        {/* ... form fields ... */}
+      </form>
+    </Form>
+  );
 }
 
 export default RegisterForm;
