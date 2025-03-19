@@ -1,0 +1,27 @@
+[vite] connecting...
+[vite] connected.
+getCompletionPercentage is not defined
+getCompletionPercentage is not defined
+The above error occurred in the <Dashboard> component:
+
+    at Dashboard (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/pages/dashboard.tsx:26:22)
+    at ProtectedRoute (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=978b9087:379:17)
+    at Router
+    at AuthProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=978b9087:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+getCompletionPercentage is not defined
+at Dashboard (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/src/pages/dashboard.tsx:45:166)
+at renderWithHooks (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:11548:26)
+at mountIndeterminateComponent (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:14926:21)
+at beginWork (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:15914:22)
+at beginWork$1 (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:19753:22)
+at performUnitOfWork (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:19198:20)
+at workLoopSync (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:19137:13)
+at renderRootSync (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:19116:15)
+at recoverFromConcurrentError (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:18736:28)
+at performSyncWorkOnRoot (https://0fd6446e-c043-406b-95c1-3c242ae0e15f-00-1q8wj0j4fg97e.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=978b9087:18879:28)
