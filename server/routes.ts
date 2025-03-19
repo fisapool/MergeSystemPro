@@ -48,7 +48,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json(history);
   });
 
-  app.post("/api/products/:id/optimize", async (req, res) => {
+  app.get("/api/analysis/lazada", async (req, res) => {
+  if (!req.isAuthenticated()) return res.sendStatus(401);
+  
+  try {
+    const { PythonShell } = require('python-shell');
+    const options = {
+      scriptPath: 'server/ml',
+      args: ['--path', 'data/lazada_products.csv']
+    };
+    
+    const results = await new Promise((resolve, reject) => {
+      PythonShell.run('process_lazada.py', options, (err: any, output: any) => {
+        if (err) reject(err);
+        resolve(JSON.parse(output[0]));
+      });
+    });
+    
+    res.json(results);
+  } catch (err) {
+    res.status(500).send("Failed to analyze Lazada data");
+  }
+});
+
+app.post("/api/products/:id/optimize", async (req, res) => {
     if (!req.isAuthenticated()) return res.sendStatus(401);
 
     const productId = parseInt(req.params.id);

@@ -58,7 +58,18 @@ class PriceOptimizer:
         # In a real implementation, this would load trained models
         self.elasticity_factor = 0.15
         
-    def optimize_price(self, current_price: float, historical_data: List[Dict]) -> dict:
+    def optimize_price(self, current_price: float, historical_data: List[Dict], competitor_data: List[Dict] = None) -> dict:
+        if competitor_data:
+            competitor_prices = [float(d['price']) for d in competitor_data]
+            competitor_avg = np.mean(competitor_prices)
+            competitor_min = np.min(competitor_prices)
+            
+            if current_price > competitor_avg * 1.2:  # If price is 20% above average
+                return {
+                    'recommended_price': round(competitor_avg * 1.1, 2),  # Price slightly above average
+                    'confidence': 0.9,
+                    'market_trend': 'competitive_adjustment'
+                }
         """Optimize price based on historical data"""
         # Simple implementation - would be replaced with actual ML model
         avg_price = np.mean([d['price'] for d in historical_data]) if historical_data else current_price
